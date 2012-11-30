@@ -8,14 +8,15 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class HWOrder implements ActionListener, KeyListener{
+public class HWOrder implements ActionListener{
 	
 	private UI ui;
-	private FileWriter writer;
+	private PrintWriter writer;
 	
 	public static void main(String[] args)
 	{
@@ -30,8 +31,6 @@ public class HWOrder implements ActionListener, KeyListener{
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		if(event.getActionCommand().equals("ok"))
-		{
 			try {
 				writeOrder(ui.getText());
 			} catch (IOException e) {
@@ -39,43 +38,17 @@ public class HWOrder implements ActionListener, KeyListener{
 						"Error", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
+			ui.clear();
+			System.exit(0);
 		}
-		
-	}
-	
-	private void writeOrder(String order) throws IOException
+	private void writeOrder(String[] order) throws IOException
 	{
+		//System.out.println(order[0] + order[1]);
 		File file = new File("order" + ".txt");
 		file.createNewFile();
-		writer = new FileWriter(file);
-		writer.write(order);
-	}
-
-	@Override
-	public void keyPressed(KeyEvent event) {
-		if(event.getKeyCode() == KeyEvent.VK_ENTER)
-		{
-			try {
-				writeOrder(ui.getText());
-			} catch (IOException e) {
-				JOptionPane.showMessageDialog(ui, "Could not create order. Please try again.",
-						"Error", JOptionPane.ERROR_MESSAGE);
-				return;
-			}
-		}
-		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	
+		writer = new PrintWriter(file);
+		writer.println(order[0]);
+		writer.println(order[1]);
+		writer.close();
+	}	
 }

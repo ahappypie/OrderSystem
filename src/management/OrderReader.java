@@ -20,13 +20,7 @@ public class OrderReader {
 	}
 	public ArrayList<String> readOrder() throws FileNotFoundException
 	{
-		ArrayList<String> product = new ArrayList<String>();
-		for(File f : orders)
-		{
-			reader = new Scanner(f);
-			product.add(reader.nextLine());
-		}
-		return product;
+		
 	}
 	
 }

@@ -1,7 +1,9 @@
 package deployment;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
@@ -14,37 +16,41 @@ import javax.swing.JTextField;
 
 public class UI extends JFrame{
 	
-	private JButton button;
-	private JTextField text;
-	private JPanel textpanel;
-	
-	public UI(EventListener listener)
+	private JButton finished;
+	private JPanel textfields;
+	private JTextField name;
+	private JTextField order;
+	public UI(ActionListener listener)
 	{
-		super();
-    	super.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        super.setSize(400, 50);
-        super.setLayout(new GridLayout());
-        super.setTitle("Create-an-Order!");
-        
-		button = new JButton();
-		button.addActionListener((ActionListener) listener);
-		button.setActionCommand("ok");
-		button.setText("OK!");
+		setBounds(100, 100, 400, 100);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
 		
-		//textpanel = new JPanel(new FlowLayout());
-		//textpanel.setSize(300, 50);
+		textfields = new JPanel();
 		
-		text = new JTextField();
-		text.addKeyListener((KeyListener) listener);
-		text.setSize(300, 50);
+		name = new JTextField();
+		name.setText("Enter name here");
+		textfields.add(name, BorderLayout.EAST);
+		order = new JTextField();
+		order.setText("Enter order here");
+		textfields.add(order, BorderLayout.WEST);
 
-		//textpanel.add(text);
-		super.add(text);
-		super.add(button);
+		getContentPane().add(textfields, BorderLayout.NORTH);
+		
+		finished = new JButton("Finished");
+		finished.addActionListener(listener);
+		getContentPane().add(finished, BorderLayout.SOUTH);
+
 	}
-	public String getText()
+	public String[] getText()
 	{
-		return text.getText();
+		String[] temp = {name.getText(), order.getText()};
+		return temp;
+	}
+	public void clear()
+	{
+		name.setText("");
+		order.setText("");
 	}
 
 }
