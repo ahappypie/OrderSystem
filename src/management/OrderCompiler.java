@@ -7,8 +7,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import data.*;
-
 public class OrderCompiler {
 	private Scanner reader;
 	private PrintWriter writer;
